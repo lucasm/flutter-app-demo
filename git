@@ -1,0 +1,110 @@
+Git
+
+# configurar na máquina
+
+	git config --global user.name "Lucas Menezes"
+	git config --global user.email "lucasmezs@outlook.com"
+	git config --global core.editor "ide-name"
+	git config --list 					* ver configurações definidas
+
+
+# iniciar repositório
+
+	cd pasta-do-projeto
+	git init
+
+	git clone url-do-repositorio-remoto-git
+
+
+# adicionar alterações para o próximo commit
+
+	git add README index.html LICENSE
+	git add .							* adiciona todos os arquivos
+	git status
+
+
+# fazer commit
+
+	git commit -m "Descrever as modificações realizadas"
+	git commit -a -m "descriçao resumida" -m descrição completa!"
+
+
+# ver logs de modificações do repositório
+
+	git log
+	git log --graph
+	git log --author "Cidadão Kane"
+	git shortlog
+	git shortlog -sn
+	git show d945h974d5h147dh51287d5h1785h (hash)
+ 
+
+# ver mudanças antes de fazer o commit
+
+	git diff
+	git diff --name-only
+
+
+# adicionar commit para arquivos já existentes
+
+	git commit -am "Modificação tal"
+
+
+# tirar arquivo do stage
+
+	git reset arquivo.txt
+
+
+# desfazer e reverter commits
+
+	git checkout nome-do-arquivo		* desfaz a última edição do arquivo
+
+	git reset --soft #hash				* desfaz o último commit, arquivo volta ao stage, pronto para commit
+
+	git reset --mixed #hash				* desfaz o commit, arquivo volta ao estado modified
+
+	git reset --hard #hash				* desfaz o commit, matando todas as alterações no arquivo
+
+	git revert #hash					* reverte as mudanças sem perder o commit do histórico
+
+
+# deploy: publicar alterações do repositório local no remoto
+
+	git push
+
+		* veja: como gerar chave SSH, configurar ssh-agent no Linux e autenticar com GitHub: https://help.github.com/articles/about-ssh
+
+		* o diretório oculto na user que armazena as chaves geradas: ls ~/.ssh
+
+
+# copiar repositório
+
+	* vantagem: criar uma cópia para si de um repositório para fazer as suas modificações
+
+	via "Fork" no GitHub
+
+
+# branches: a árvore de ramificações
+
+	* vantagem: evitar confiltos, poder modificar o repositório sem afetar o branch principal (geralmente master). cada "branch" aponta para um "commit" e suas alterações anteriores. é posível ter branches em diferentes estágios.
+
+	git checkout -b novo-branch			* criar novo branch
+	git checkout novo-branch			* alternar entre branches (saindo do master)
+	git branch							* listar branches existentes e ver o atual
+	git branch -D novo-branch			* deletar branch
+
+
+# mesclar branches
+
+	git merge nome-branch
+
+		* cria um novo commit que mescla o branch novo ao principal (master) unindo suas últimas modificações. operação não destrutiva, pode ser desfeita. ruim pois cria um histórico poluído, a árvore de mesclagem pode parecer confusa.
+
+	git rebase nome-branch
+
+		* mescla branches jogando o útimo commit pra frente da fila da árvore com todas as modificações. pode ser ruim pois perde a ordem cornológica do histórico.
+
+
+# git stash
+
+		* guardando as alterações em stage para serem revisadas depois.
